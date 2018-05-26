@@ -1,12 +1,14 @@
 package com.example.zsombor.networksecurityconfigdemo;
 
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,12 +23,15 @@ import java.net.URLConnection;
 public class MainActivity extends AppCompatActivity {
 
     private Button downloadButton;
-    private Button downloadHTTPSButton;
     private EditText editTextField;
+    private Integer select;
+    private RadioButton selfSignedButton;
+    private RadioButton letsEncryptButton;
+    private RadioButton customCAButton;
+    private RadioButton plainTextButton;
 
     private class ReadTask extends AsyncTask<String, Integer, String>
     {
-
         @Override
         protected String doInBackground(String... params)
         {
@@ -56,22 +61,59 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        select = new Integer(1);
         downloadButton = (Button) findViewById(R.id.button);
-        downloadHTTPSButton = (Button) findViewById(R.id.button2);
         editTextField = (EditText) findViewById(R.id.editText);
 
+        selfSignedButton = (RadioButton) findViewById(R.id.radio_pirates);
+        letsEncryptButton = (RadioButton)findViewById(R.id.radio_ninjas);
+        customCAButton = (RadioButton) findViewById(R.id.radio_ninjas2);
+        plainTextButton = (RadioButton) findViewById(R.id.radio_ninjas3);
+
+        selfSignedButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                editTextField.setText("Self signed cert at https://singleframesecurity.net:444");
+                select = 4;
+            }
+        });
+
+        letsEncryptButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                editTextField.setText("Proper cert at https://singleframesecurity.net:443");
+                select = 3;
+            }
+        });
+
+        customCAButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                editTextField.setText("Custom CA pinned at https://test.singleframesecurity.net:442");
+                select = 2;
+            }
+        });
+
+        plainTextButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                editTextField.setText("Plain text on http://singleframesecurity.net");
+                select = 1;
+            }
+        });
         downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
-                    editTextField.setText("Loading!");
                     AsyncTask<String,Integer,String> rt = new ReadTask();
-                    //rt.execute("https://metacortex.hu/~zsombor/test.html");
-                    rt.execute("http://mrgsrv1.mrg-effitas.com/keepalive/alive2.html");
+                    if(select == 1){
+                        rt.execute("http://singleframesecurity.net/success.html");
+                    } else if (select == 2){
+                        rt.execute("https://test.singleframesecurity.net:442/success.html");
+                    } else if (select == 3){
+                        rt.execute("https://singleframesecurity.net/success.html");
+                    } else if (select == 4) {
+                        rt.execute("https://singleframesecurity.net:444/success.html");
+                    }
                     String back = rt.get();
                     editTextField.setText(back);
                 }catch(Exception e){
@@ -83,25 +125,5 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             });
-
-        downloadHTTPSButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                try {
-                    editTextField.setText("Loading!");
-                    AsyncTask<String,Integer,String> rt = new ReadTask();
-                    //rt.execute("https://metacortex.hu/~zsombor/test.html");
-                    rt.execute("https://mrgsrv1.mrg-effitas.com:9998/keepalive/alive3.html");
-                    String back = rt.get();
-                    editTextField.setText(back);
-                }catch(Exception e){
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    e.printStackTrace(pw);
-                    editTextField.setText(sw.toString());
-                }
-            }
-
-        });
     }
 }
