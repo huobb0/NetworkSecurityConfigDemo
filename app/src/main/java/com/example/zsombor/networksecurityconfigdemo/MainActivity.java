@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         selfSignedButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
-                editTextField.setText("Self signed cert at https://singleframesecurity.net:444");
+                editTextField.setText("Self signed cert at https://secure.singleframesecurity.net:444");
                 select = 4;
             }
         });
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (select == 3){
                         rt.execute("https://singleframesecurity.net/success.html");
                     } else if (select == 4) {
-                        rt.execute("https://singleframesecurity.net:444/success.html");
+                        rt.execute("https://secure.singleframesecurity.net:444/success.html");
                     }
                     String back = rt.get();
                     editTextField.setText(back);

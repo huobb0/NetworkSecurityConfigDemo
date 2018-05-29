@@ -10,16 +10,16 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Download HTTP"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="40dp"
+        android:text="Download"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="336dp"
-        android:layout_height="390dp"
+        android:layout_width="348dp"
+        android:layout_height="224dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:editable="false"
@@ -31,21 +31,50 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="22dp"
+        android:layout_height="19dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Downloaded text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radioGroup2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
-        android:text="Download HTTPS"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        tools:layout_editor_absoluteX="0dp">
+
+        <RadioButton
+            android:id="@+id/radio_pirates"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:onClick="onSelfSignedClicked"
+            android:text="self-signed:444" />
+
+        <RadioButton
+            android:id="@+id/radio_ninjas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onLetsEncryptClicked"
+            android:text="proper:443"
+            tools:ignore="OnClick" />
+
+        <RadioButton
+            android:id="@+id/radio_ninjas2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onCustomCAClicked"
+            android:text="Custom CA:442" />
+
+        <RadioButton
+            android:id="@+id/radio_ninjas3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onCustomCAClicked"
+            android:text="Plain text:80" />
+    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
