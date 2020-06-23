@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    <RadioGroup
         android:id="@+id/radioGroup2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -48,14 +48,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <RadioButton
-            android:id="@+id/radio_pirates"
-            android:layout_width="142dp"
-            android:layout_height="wrap_content"
-            android:onClick="onSelfSignedClicked"
-            android:text="self-signed:444" />
-
-        <RadioButton
-            android:id="@+id/radio_ninjas"
+            android:id="@+id/radio_letsencrypt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onLetsEncryptClicked"
@@ -63,14 +56,14 @@
             tools:ignore="OnClick" />
 
         <RadioButton
-            android:id="@+id/radio_ninjas2"
+            android:id="@+id/radio_customca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onCustomCAClicked"
-            android:text="Custom CA:442" />
+            android:text="Custom CA:444" />
 
         <RadioButton
-            android:id="@+id/radio_ninjas3"
+            android:id="@+id/radio_plaintext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onCustomCAClicked"
