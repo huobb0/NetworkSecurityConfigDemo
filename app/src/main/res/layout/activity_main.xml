@@ -48,13 +48,6 @@
         tools:layout_editor_absoluteX="0dp">
 
         <RadioButton
-            android:id="@+id/radio_pirates"
-            android:layout_width="142dp"
-            android:layout_height="wrap_content"
-            android:onClick="onSelfSignedClicked"
-            android:text="self-signed:444" />
-
-        <RadioButton
             android:id="@+id/radio_ninjas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

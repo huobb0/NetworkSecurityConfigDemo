@@ -68,35 +68,27 @@ public class MainActivity extends AppCompatActivity {
         downloadButton = (Button) findViewById(R.id.button);
         editTextField = (EditText) findViewById(R.id.editText);
 
-        selfSignedButton = (RadioButton) findViewById(R.id.radio_pirates);
         letsEncryptButton = (RadioButton)findViewById(R.id.radio_ninjas);
         customCAButton = (RadioButton) findViewById(R.id.radio_ninjas2);
         plainTextButton = (RadioButton) findViewById(R.id.radio_ninjas3);
 
-        selfSignedButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View arg0){
-                editTextField.setText("Self signed cert at https://secure.singleframesecurity.net:444");
-                select = 4;
-            }
-        });
-
         letsEncryptButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
-                editTextField.setText("Proper cert at https://singleframesecurity.net:443");
+                editTextField.setText("Proper cert at https://zs.labs.defdev.eu:443");
                 select = 3;
             }
         });
 
         customCAButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
-                editTextField.setText("Custom CA pinned at https://test.singleframesecurity.net:442");
+                editTextField.setText("Custom CA pinned at https://zs.labs.defdev.eu:444");
                 select = 2;
             }
         });
 
         plainTextButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
-                editTextField.setText("Plain text on http://singleframesecurity.net");
+                editTextField.setText("Plain text on http://zs.labs.defdev.eu");
                 select = 1;
             }
         });
@@ -106,13 +98,11 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     AsyncTask<String,Integer,String> rt = new ReadTask();
                     if(select == 1){
-                        rt.execute("http://singleframesecurity.net/success.html");
+                        rt.execute("http://zs.labs.defdev.eu/success.html");
                     } else if (select == 2){
-                        rt.execute("https://test.singleframesecurity.net:442/success.html");
+                        rt.execute("https://zs.labs.defdev.eu:444/success.html");
                     } else if (select == 3){
-                        rt.execute("https://singleframesecurity.net/success.html");
-                    } else if (select == 4) {
-                        rt.execute("https://secure.singleframesecurity.net:444/success.html");
+                        rt.execute("https://zs.labs.defdev.eu/success.html");
                     }
                     String back = rt.get();
                     editTextField.setText(back);
